@@ -1,0 +1,28 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferencia</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+</head>
+<body>
+    <h1>Realizar transferencia</h1>
+    <hr>
+    <form class="formulario">
+        <label for="fcuentaDestino">Seleccionar cuenta a debitar</label><br>
+        <select class="listaDesplegable">
+            <option value="cuenta1">Cuenta1</option>
+            <option value="Cuenta2">Cuenta2</option>
+            <option value="Cuenta3">Cuenta3</option>
+        </select><br>
+        <label for="fnombreCuenta">Nombre del propietario de la cuenta</label>
+        <input type="text" id="fnombreCuenta"><br>
+        <label for="fcuentaRec">Numero de cuenta receptora</label>
+        <input type="number" id="fcuentaRec"><br>
+        <label for="fmonto">Monto a transferir</label>
+        <input type="number" id="fmonto"><br>
+        <input type="submit" id="btnRegistrar" value="Realizar transferencia">
+    </form>
+</body>
+</html>

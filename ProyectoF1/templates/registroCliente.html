@@ -1,0 +1,50 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro cliente</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+</head>
+<body>
+    <h1>Registro de cliente particular</h1>
+    <form class="formulario">
+        <label for="fcui" class="reg">CUI</label><br>
+        <input type="number" id="fcui" name="cui"><br>
+
+        <label for="fcui">Nit</label><br>
+        <input type="number" id="fnit" name="nit"><br>
+
+        <label for="fnombre">Nombre Completo</label><br>
+        <input type="text" id="fnombre" name="nombreCompleto"><br>
+
+        <label for="fechaNac">Fecha de nacimiento</label><br>
+        <input type="date" id="fechaNac" name="fechaNacimiento"><br>
+
+        <label for="fcorreo">Correo</label><br>
+        <input type="email" id="fcorreo" name="correo"><br>
+
+        <input type="submit" id="btnRegistrar" value="Registrar">
+    </form>
+    <hr>
+    <h1>Registro de Empresa</h1>
+    <form class="formulario">
+        <label for="fcui">Tipo Empresa</label><br>
+        <input type="text" id="ftipoEmpresa" name="tipoEmpresa"><br>
+
+        <label for="fnombreEmp">Nombre de la empresa</label><br>
+        <input type="text" id="fnombreEmp" name="nombreEmp"><br>
+
+        <label for="fnombreComercial">Nombre Comercial</label><br>
+        <input type="text" id="fnombreCom" name="nombreCom"><br>
+
+        <label for="fnombreComercial">Nombre Completo Representante</label><br>
+        <input type="text" id="fnombreCompletoRep" name="nombreCompletoRep"><br>
+
+        <label for="fcorreo">Correo</label><br>
+        <input type="email" id="fcorreo" name="correo"><br>
+
+        <input type="submit" id="btnRegistrar" value="Registrar">
+    </form>
+</body>
+</html>

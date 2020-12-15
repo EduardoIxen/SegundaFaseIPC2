@@ -1,0 +1,54 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado de cuenta</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+</head>
+<body>
+    <h1>Estado de cuenta</h1>
+    <form class="formulario">
+        <label>Seleccione la cuenta</label>
+        <select class="listaDesplegable">
+            <option value="cuenta1">Cuenta1</option>
+            <option value="Cuenta2">Cuenta2</option>
+            <option value="Cuenta3">Cuenta3</option>
+        </select><br>
+        <input type="submit" value="Consultar estado de cuenta" class="btnSubmit">
+    </form>
+    <hr>
+    <table class="tabla1">
+        <tr>
+            <th>No.</th>
+            <th>Transaccion</th>
+            <th>Fecha</th>
+            <th>Monto</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Pago de luz</td>
+            <td>12-12-2020</td>
+            <td>Q500</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Pago de luz</td>
+            <td>12-12-2020</td>
+            <td>Q500</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Pago de luz</td>
+            <td>12-12-2020</td>
+            <td>Q500</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Pago de luz</td>
+            <td>12-12-2020</td>
+            <td>Q500</td>
+        </tr>
+    </table>
+</body>
+</html>

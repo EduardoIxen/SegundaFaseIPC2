@@ -1,0 +1,108 @@
+{% load static %}
+body{
+/*Degradado css tomado de https://www.cssmatic.com/es/gradient-generator#'\*/
+background: rgba(179,220,237,1);
+background: -moz-linear-gradient(45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(179,220,237,1)), color-stop(50%, rgba(41,184,229,1)), color-stop(100%, rgba(188,224,238,1)));
+background: -webkit-linear-gradient(45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+background: -o-linear-gradient(45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+background: -ms-linear-gradient(45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+background: linear-gradient(45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee', GradientType=1 )
+}
+.formulario{
+    margin: auto;
+    padding: 2%;
+    background-color: blue;
+    border-radius: 10px;
+    width: 40%;
+}
+input{
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #0093FF;
+    padding: 2%;
+    display: block;
+
+}
+label{
+    font-size: 150%;
+    color: cornsilk;
+}
+#btnRegistrar{
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    background-color: #05D8AF;
+    font-size: large;
+    cursor: pointer;
+}
+#btnRegistrar:focus{
+    background: #05D868;
+}
+.btnSubmit{
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    background-color: #05D8AF;
+    font-size: large;
+    cursor: pointer;
+}
+.btnSubmit:focus{
+    background: #05D868;
+}
+table, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 20px;
+}
+table{
+    width: 100%;
+}
+div{
+    margin: 5%;
+}
+th{
+    background-color: #05D84B;
+    color: white;
+    font-weight: bold;
+}
+h1{
+    text-align: center;
+    color: #00269C;
+}
+tr:nth-child(even) {
+    background-color: white;
+}
+tr{
+    text-align: center;
+}
+
+.btn{
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    background-color: #05D8AF;
+    font-size: large;
+    cursor: pointer;
+}
+.btn:focus{
+    background: #05D868;
+}
+.login{
+	left: 50%;
+	top: 50%;
+}
+
+.reg{
+    display: inline-block;
+}
+
+.listaDesplegable{
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #0093FF;
+    padding: 2%;
+    display: block;
+}

@@ -1,0 +1,30 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Tarjeta</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+</head>
+<body>
+    <h1>Pago de tarjeta</h1>
+    <form class="formulario">
+        <label for="ftarjeta">Tarjeta a pagar</label>
+        <select class="listaDesplegable">
+            <option value="cuenta1">Tarjeta 1</option>
+            <option value="Cuenta2">Tarjeta 2</option>
+        </select><br>
+        <label for="fnumTarjeta">O digite el numero de tarjeta</label><br>
+        <input type="text" id="fnumTarjeta"><br>
+        <label for="fnumCuenta">Seleccione la cuenta a debitar</label><br>
+        <select class="listaDesplegable">
+            <option value="cuenta1">Cuenta1</option>
+            <option value="Cuenta2">Cuenta2</option>
+            <option value="Cuenta3">Cuenta3</option>
+        </select><br>
+        <label for="fmonto">Monto de pago</label><br>
+        <input type="text" id="fmonto" value="Q 0.00" disabled="disabled"><br>
+        <input type="submit" id="btnPagarTarjeta" class="btnSubmit" value="Pagar tarjeta">
+    </form>
+</body>
+</html>

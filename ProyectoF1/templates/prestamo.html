@@ -1,0 +1,29 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de prestamo</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+</head>
+<body>
+    <h1>Solicitud de prestamo</h1>
+    <form class="formulario">
+        <label for="fcuentaPrestamo">Cuenta que solicita el prestamo</label>
+        <select class="listaDesplegable" id="fcuentaPrestamo" name="cuentaPresta">
+            <option value="quincena">Cuenta 1</option>
+            <option value="mensual">Cuenta 2</option>
+            <option value="trimestre">Cuenta 3</option>
+        </select><br>
+        <label for="fmontoRequerido">Monto requerido</label>
+        <input type="text" id="fmontoRequerido" name="montoRequerido"><br>
+        <label for="fmodalidadPago">Modalidad de pago</label>
+        <select class="listaDesplegable" id="fmodalidadPago" name="modalidadDePago">
+            <option value="quincena">Quincena</option>
+            <option value="mensual">Mensual</option>
+            <option value="trimestre">Trimestre</option>
+        </select><br>
+        <input type="submit" id="bntPrestamo" class="btnSubmit" value="Solicitar prestamo">
+    </form>
+</body>
+</html>

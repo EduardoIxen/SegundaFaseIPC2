@@ -26,3 +26,6 @@ def estadoDeCeunta(request):
 
 def pagoServicio(request):
     return render(request, "pagoservicio.html")
+
+def base1(request):
+    return render(request, "desdebase.html")

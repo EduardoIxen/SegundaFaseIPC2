@@ -1,12 +1,5 @@
-<html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitud de prestamo</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
     <h1>Solicitud de prestamo</h1>
     <form class="formulario">
         <label for="fcuentaPrestamo">Cuenta que solicita el prestamo</label>
@@ -25,5 +18,4 @@
         </select><br>
         <input type="submit" id="bntPrestamo" class="btnSubmit" value="Solicitar prestamo">
     </form>
-</body>
-</html>
+{% endblock content %}

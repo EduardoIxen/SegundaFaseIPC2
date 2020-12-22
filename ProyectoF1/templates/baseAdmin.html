@@ -1,0 +1,29 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#news">News</a>
+        <div class="dropdown">
+            <button class="dropbtn">Registro
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Registro Cliente Individual</a>
+                <a href="#">Registro Empresa</a>
+            </div>
+        </div>
+    </div>
+    {% block content %}
+        {#        contenido de las paginas que utilizan esta plantilla#}
+    {% endblock content %}
+
+
+</body>
+</html>

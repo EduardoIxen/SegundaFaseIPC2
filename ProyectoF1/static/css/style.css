@@ -49,6 +49,8 @@ label{
     background-color: #05D8AF;
     font-size: large;
     cursor: pointer;
+    border-radius: 5px;
+    padding: 2%;
 }
 .btnSubmit:focus{
     background: #05D868;

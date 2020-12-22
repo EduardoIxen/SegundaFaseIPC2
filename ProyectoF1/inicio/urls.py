@@ -20,7 +20,7 @@ from . import views
 urlpatterns = [
     path('', views.login),
     path('login/', views.login),
-    path('registrocliente/', views.registroCliente),
+    #path('registrocliente/', views.registroCliente),
     path('transferencia/', views.transferencia),
     path('pagotarjeta/', views.pagoTarjeta),
     path('preautorizacioncheque/', views.preautorizacionCheque),

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'inicio',
+    'Administrador',
 ]
 
 MIDDLEWARE = [
@@ -84,16 +85,16 @@ WSGI_APPLICATION = 'ProyectoF1.wsgi.application'
 #    }
 #}
 
-#DATABASE = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'django',  # dbname
-#        'USER': 'root',  # master username
-#        'PASSWORD': '201113759',  # master password
-#        'HOST': 'localhost',  # Endpoint
-#        'PORT': '3306',
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Proyecto',  # dbname
+        'USER': 'root',  # master username
+        'PASSWORD': 'admin',  # master password
+        'HOST': 'localhost',  # Endpoint
+        'PORT': '3306',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

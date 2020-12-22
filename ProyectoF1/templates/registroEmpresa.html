@@ -1,10 +1,10 @@
-{% extends 'baseAdmin.html' %}
+{% extends "baseAdmin.html" %}
 {% block content %}
     <h1>{{ mensaje }}</h1>
     <hr>
     <form method="post" class="formulario">
         {{ form.as_p }}
         {% csrf_token %}
-        <button type="submit" class="btnSubmit"> Registrar cliente</button>
+        <button type="submit" class="btnSubmit"> Registrar Empresa</button>
     </form>
 {% endblock %}

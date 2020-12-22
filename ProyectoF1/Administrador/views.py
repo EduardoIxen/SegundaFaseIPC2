@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.shortcuts import redirect
 from .forms import *
 import MySQLdb
 
@@ -61,6 +61,7 @@ def registroEmpresa(request):
         if form.is_valid():
             datos = form.cleaned_data
             idTipoEmpresa = datos.get('idtipoempresa')
+            print(type(idTipoEmpresa.idtipoempresa), "tipooo")
             nombre = datos.get('nombre')
             nombreComercial = datos.get('nombrecomercial')
             nombreRepresentanteLegal = datos.get('nombrerepresentantelegal')
@@ -68,10 +69,10 @@ def registroEmpresa(request):
             contrasenia = datos.get('contrasenia')
             db = MySQLdb.connect(host=host, user=user, password=contra, db=db_name, connect_timeout=5)
             cursor = db.cursor()
-            consulta = "INSERT INTO ClienteIndividual VALUES(" + str(
-                idTipoEmpresa) + ",'" + nombre + "','" + nombreComercial + "', '" + nombreRepresentanteLegal + "', '" + usuario + "', '" + contrasenia + "')"
+            consulta = "INSERT INTO Empresa(idTipoEmpresa, nombre, nombreComercial, nombreRepresentanteLegal, usuario, contrasenia) VALUES(" + str(
+                idTipoEmpresa.idtipoempresa) + ",'" + nombre + "','" + nombreComercial + "', '" + nombreRepresentanteLegal + "', '" + usuario + "', '" + contrasenia + "')"
             print(consulta)
-            #cursor.execute(consulta)
+            cursor.execute(consulta)
             db.commit()
             cursor.close()
             nombre = f"Empresa {nombreComercial} registrada de manera correcta"
@@ -88,3 +89,29 @@ def registroEmpresa(request):
             }
 
     return render(request, 'registroEmpresa.html', variables)
+
+def loginAdmin(request):
+    mensaje = ""
+    variables = {
+        'mensaje': mensaje
+    }
+    if request.method == "POST":
+        usuario = request.POST['usuariolog']
+        password = request.POST['passwordlog']
+        print(usuario)
+        print(password)
+    #     db = MySQLdb.connect(host=host, user=user, password=contra, db=db_name, connect_timeout=5)
+    #     cursor = db.cursor()
+        #consulta = "SELECT * FROM Administrador WHERE usuario = '"+usuario+"' and contrasenia = '"+password+"'"
+        admin = Administrador.objects.filter(usuario=usuario).filter(contrasenia=password).values_list()
+        print(admin)
+        if not admin:
+            mensaje = "Usuario o contraseña incorrectos"
+        else:
+            mensaje = "Usuario logueado"
+            return redirect('registrocliente', permanent=True)
+        variables = {
+            'mensaje': mensaje
+        }
+
+    return render(request, "adminlogin.html", variables)

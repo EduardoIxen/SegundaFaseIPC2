@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
-    <title>Login</title>
+    <title>Login Plataforma Administrativa</title>
 </head>
 <body>
     <div class="login" >
-        <h1>Login</h1>
+        <h1>Login Plataforma administrativa</h1>
         <form class="formulario" method="post">
             {% csrf_token %}
             <label for="Iusuario">Usuario</label><br>
-            <input type="text" id="Iusuario" name="usuarioLog"><br>
+            <input type="text" id="Iusuario" name="usuariolog"><br>
 
             <label for="Ipass">Contraseña</label><br>
-            <input type="password" id="Ipass" name="passwordLog"><br>
+            <input type="password" id="Ipass" name="passwordlog"><br>
 
             <input type="submit" value="Ingresar" class="btn">
         </form>
     </div>
+    {% if mensaje == "Usuario o contraseña incorrectos" %}
+        <h1 style="color: red">{{ mensaje }}</h1>
+    {% endif %}
+
 
 </body>
 </html>

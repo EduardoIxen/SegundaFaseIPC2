@@ -72,12 +72,11 @@ def base1(request):
     return render(request, "desdebase.html")
 
 def infoUsr(request):
-    diccSession = request.session['dato']
-    nombre = diccSession.get('nombre')
-    return render(request, "infoUsr.html", {'nombre':nombre})
+    diccSession = request.session['datos']
+    return render(request, "infoUsr.html", diccSession)
 
 def logout(request):
-    request.session['dato'] = {}
+    request.session['datos'] = {}
     dic = request.session['datos']
     nombre = dic.get('nombre')
     print("nombreeeee", nombre)

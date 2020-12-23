@@ -8,8 +8,16 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="#news">News</a>
+        <div class="dropdown">
+            <button class="dropbtn">Cuentas
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="{% url 'addCuentaAhorro' %}">Crear cuenta de ahorro</a>
+                <a href="{% url 'addCuentaMonetaria' %}">Crear cuenta monetaria</a>
+                <a href="{% url 'addCuentaPlazoFijo' %}">Crear cuenta de plazo fijo</a>
+            </div>
+        </div>
         <div class="dropdown">
             <button class="dropbtn">Registro
                 <i class="fa fa-caret-down"></i>

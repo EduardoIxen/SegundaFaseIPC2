@@ -23,4 +23,7 @@ urlpatterns = [
     path('registroempresa/', views.registroEmpresa, name="registroempresa"),
     path('loginadmin/', views.loginAdmin, name="loginadmin"),
     path('logout/', views.logout, name="logout"),
+    path('addCuentaMonetaria/', views.addCuentaMonetaria, name="addCuentaMonetaria"),
+    path('addCuentaAhorro/', views.addCuentaDeAhorro, name="addCuentaAhorro"),
+    path('addcuentaplazofijo/', views.addCuentaPlazoFijo, name="addCuentaPlazoFijo"),
 ]

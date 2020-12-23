@@ -110,6 +110,14 @@ tr{
     padding: 2%;
     display: block;
 }
+select{
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #0093FF;
+    padding: 2%;
+    display: block;
+}
 #id_idtipoempresa{
     position: relative;
     width: 100%;
@@ -177,4 +185,12 @@ tr{
 }
 .dropdown:hover .dropdown-content {
   display: block;
+}
+.datos{
+    text-align: left;
+    display: inline-block;
+    font-size: 20px;
+}
+.error{
+    color: red;
 }

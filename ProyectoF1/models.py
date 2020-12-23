@@ -98,7 +98,7 @@ class Tipoempresa(models.Model):
     def __str__(self):
         # return '{} {}'.format(self.idtipoempresa, self.nombre)
         return '{}'.format(self.nombre)
-    
+
     class Meta:
         managed = False
         db_table = 'tipoempresa'

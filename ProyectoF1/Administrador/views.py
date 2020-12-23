@@ -3,6 +3,8 @@ from django.shortcuts import redirect
 from .forms import *
 import MySQLdb
 
+from .models import Empresa
+
 host = 'localhost'
 db_name = 'Proyecto'
 user = 'root'
@@ -50,14 +52,14 @@ def registroCliente(request):
     return render(request, 'registroCliente.html', variables)
 
 def registroEmpresa(request):
-    form = Empresa()
+    form = Empresaa()
     nombre = "Registro de Empresa"
     variables = {
         "form": form,
         "mensaje": nombre
     }
     if request.method == "POST":
-        form = Empresa(data=request.POST)
+        form = Empresaa(data=request.POST)
         if form.is_valid():
             datos = form.cleaned_data
             idTipoEmpresa = datos.get('idtipoempresa')
@@ -76,7 +78,7 @@ def registroEmpresa(request):
             db.commit()
             cursor.close()
             nombre = f"Empresa {nombreComercial} registrada de manera correcta"
-            form = Empresa()
+            form = Empresaa()
             variables = {
                 "form": form,
                 "mensaje": nombre
@@ -87,7 +89,6 @@ def registroEmpresa(request):
                 "form": form,
                 "mensaje": nombre
             }
-
     return render(request, 'registroEmpresa.html', variables)
 
 def loginAdmin(request):
@@ -118,5 +119,261 @@ def loginAdmin(request):
     return render(request, "adminlogin.html", variables)
 
 def logout(request):
-    request.session['dato'] = {}
+    dic = request.session['datos']
+    nombre = dic.get('nombre')
+    print("nombreeeee en admin", nombre)
     return redirect('loginadmin')
+
+def addCuentaMonetaria(request):
+    form = CuentaMonetaria()
+    mensaje = ""
+    variables = {
+        'form':form,
+        'mensaje':mensaje
+    }
+    if request.method == "POST":
+        form = CuentaMonetaria(data=request.POST)
+        if form.is_valid():
+            datos = form.cleaned_data
+            codigoCuenta = datos.get('codigocuenta')
+            montoPorManejo = datos.get('montopormanejo')
+            saldo = datos.get('saldo')
+            tipoCliente = datos.get('tipocliente')
+            idCliente = datos.get('idcliente')
+            print(f"{type(tipoCliente)}, id {type(idCliente)}")
+            db = MySQLdb.connect(host=host, user=user, password=contra, db=db_name, connect_timeout=5)
+
+            cursor = db.cursor()
+            cursor2 = db.cursor()
+            consulta = "INSERT INTO CuentaMonetaria VALUES(" + str(codigoCuenta) + "," + str(
+                montoPorManejo) + "," + str(saldo) + ")"
+            print(consulta)
+            cursor.execute(consulta)
+            db.commit()
+            cursor.close()
+            if tipoCliente.strip() == "1": #persona individual
+                cliente = Clienteindividual.objects.filter(cui=idCliente).values_list()
+                if not cliente:
+                    mensaje = "El cliente no existe"
+                    form = CuentaMonetaria()
+                    variables = {
+                        'mensaje':mensaje,
+                        'form':form
+                    }
+                else:
+                    consulta2 = "INSERT INTO DetalleClienteCuenta(codigoCliente, codigoCuentaMonetaria, estaActiva) VALUES("+str(
+                        idCliente)+", "+str(codigoCuenta)+", "+str(True)+")"
+                    print(consulta2)
+                    cursor2.execute(consulta2)
+                    db.commit()
+                    cursor2.close()
+                    form = CuentaMonetaria()
+                    mensaje = "Cuenta creada correctamente"
+                    variables = {
+                        'form': form,
+                        'mensaje': mensaje
+                    }
+            elif tipoCliente.strip() == "2":
+                cliente = Empresa.objects.filter(idempresa=idCliente).values_list()
+                if not cliente:
+                    mensaje = "El cliente no existe"
+                    form = CuentaMonetaria()
+                    variables = {
+                        'mensaje': mensaje,
+                        'form': form
+                    }
+                else:
+                    consulta2 = "INSERT INTO DetalleClienteCuenta(idEmpresa, codigoCuentaMonetaria, estaActiva) VALUES(" + str(
+                        idCliente) + ", " + str(codigoCuenta) + ", " + str(True) + ")"
+                    print(consulta2)
+                    cursor2.execute(consulta2)
+                    db.commit()
+                    cursor2.close()
+                    form = CuentaMonetaria()
+                    mensaje = "Cuenta creada correctamente"
+                    variables = {
+                        'form': form,
+                        'mensaje': mensaje
+                    }
+        else:
+            mensaje = "Error de registro de cuenta"
+            variables = {
+                'form':form,
+                'mensaje':mensaje
+            }
+
+    return render(request, "addCuentaMonetaria.html", variables)
+
+def addCuentaDeAhorro(request):
+    form = CuentaDeAhorro()
+    mensaje = ''
+    variables = {
+        'mensaje': mensaje,
+        'form': form
+    }
+    if request.method == "POST":
+        form = CuentaDeAhorro(data=request.POST)
+        if form.is_valid():
+            datos = form.cleaned_data
+            codigoCuenta = datos.get('codigocuenta')
+            tasainteres = datos.get('tasainteres')
+            saldo = datos.get('saldo')
+            tipoCliente = datos.get('tipocliente')
+            idCliente = datos.get('idcliente')
+            print(f"{type(tipoCliente)}, id {type(idCliente)}")
+            db = MySQLdb.connect(host=host, user=user, password=contra, db=db_name, connect_timeout=5)
+            cursor = db.cursor()
+            cursor2 = db.cursor()
+            cuenta1 = Cuentadeahorro.objects.filter(codigocuenta=codigoCuenta).values_list()
+            cuenta2 = Cuentaplazofijo.objects.filter(codigocuenta=codigoCuenta).values_list()
+            cuenta3 = Cuentadeahorro.objects.filter(codigocuenta=codigoCuenta).values_list()
+            pasa = False
+            if not cuenta1:
+                if not cuenta2:
+                    if not cuenta3:
+                       pasa = True
+            if pasa:
+                consulta = "INSERT INTO CuentaDeAhorro VALUES(" + str(codigoCuenta) + "," + str(
+                    tasainteres) + "," + str(saldo) + ")"
+                print(consulta)
+                cursor.execute(consulta)
+                db.commit()
+                cursor.close()
+                if tipoCliente.strip() == "1": #persona individual
+                    cliente = Clienteindividual.objects.filter(cui=idCliente).values_list()
+                    if not cliente:
+                        mensaje = "El cliente no existe"
+                        form = CuentaDeAhorro()
+                        variables = {
+                            'mensaje':mensaje,
+                            'form':form
+                        }
+                    else:
+                        consulta2 = "INSERT INTO DetalleClienteCuenta(codigoCliente, codigoCuentaAhorro, estaActiva) VALUES("+str(
+                            idCliente)+", "+str(codigoCuenta)+", "+str(True)+")"
+                        print(consulta2)
+                        cursor2.execute(consulta2)
+                        db.commit()
+                        cursor2.close()
+                        form = CuentaDeAhorro()
+                        mensaje = "Cuenta creada correctamente"
+                        variables = {
+                            'form': form,
+                            'mensaje': mensaje
+                        }
+                elif tipoCliente.strip() == "2":
+                    cliente = Empresa.objects.filter(idempresa=idCliente).values_list()
+                    if not cliente:
+                        mensaje = "El cliente no existe"
+                        form = CuentaDeAhorro()
+                        variables = {
+                            'mensaje': mensaje,
+                            'form': form
+                        }
+                    else:
+                        consulta2 = "INSERT INTO DetalleClienteCuenta(idEmpresa, codigoCuentaAhorro, estaActiva) VALUES(" + str(
+                            idCliente) + ", " + str(codigoCuenta) + ", " + str(True) + ")"
+                        print(consulta2)
+                        cursor2.execute(consulta2)
+                        db.commit()
+                        cursor2.close()
+                        form = CuentaDeAhorro()
+                        mensaje = "Cuenta creada correctamente"
+                        variables = {
+                            'form': form,
+                            'mensaje': mensaje
+                        }
+            else:
+                mensaje = "El codigo de la cuenta ya existe"
+                form = CuentaDeAhorro()
+                variables = {
+                    'mensaje': mensaje,
+                    'form': form
+                }
+        else:
+            mensaje = "Error de registro de cuenta"
+            variables = {
+                'form':form,
+                'mensaje':mensaje
+            }
+
+    return render(request, "addCuentaAhorro.html", variables)
+
+def addCuentaPlazoFijo(request):
+    form = CuentaPlazoFijo()
+    mensaje = ''
+    variables = {
+        'mensaje': mensaje,
+        'form': form
+    }
+    if request.method == "POST":
+        form = CuentaPlazoFijo(data=request.POST)
+        if form.is_valid():
+            datos = form.cleaned_data
+            codigoCuenta = datos.get('codigocuenta')
+            tasainteres = datos.get('tasainteres')
+            periodoTiempo = datos.get('periodotiempo')
+            saldo = datos.get('saldo')
+            tipoCliente = datos.get('tipocliente')
+            idCliente = datos.get('idcliente')
+            print(f"{type(tipoCliente)}, id {type(idCliente)}")
+            db = MySQLdb.connect(host=host, user=user, password=contra, db=db_name, connect_timeout=5)
+            cursor = db.cursor()
+            cursor2 = db.cursor()
+            consulta = "INSERT INTO CuentaPlazoFijo VALUES(" + str(codigoCuenta) + "," + str(
+                tasainteres) + ","+str(periodoTiempo)+" ," + str(saldo) + ")"
+            print(consulta)
+            cursor.execute(consulta)
+            db.commit()
+            cursor.close()
+            if tipoCliente.strip() == "1":  # persona individual
+                cliente = Clienteindividual.objects.filter(cui=idCliente).values_list()
+                if not cliente:
+                    mensaje = "El cliente no existe"
+                    form = CuentaDeAhorro()
+                    variables = {
+                        'mensaje': mensaje,
+                        'form': form
+                    }
+                else:
+                    consulta2 = "INSERT INTO DetalleClienteCuenta(codigoCliente, codigoCuentaPlazoFijo, estaActiva) VALUES(" + str(
+                        idCliente) + ", " + str(codigoCuenta) + ", " + str(True) + ")"
+                    print(consulta2)
+                    cursor2.execute(consulta2)
+                    db.commit()
+                    cursor2.close()
+                    form = CuentaDeAhorro()
+                    mensaje = "Cuenta creada correctamente"
+                    variables = {
+                        'form': form,
+                        'mensaje': mensaje
+                    }
+            elif tipoCliente.strip() == "2":
+                cliente = Empresa.objects.filter(idempresa=idCliente).values_list()
+                if not cliente:
+                    mensaje = "El cliente no existe"
+                    form = CuentaDeAhorro()
+                    variables = {
+                        'mensaje': mensaje,
+                        'form': form
+                    }
+                else:
+                    consulta2 = "INSERT INTO DetalleClienteCuenta(idEmpresa, codigoCuentaPlazoFijo, estaActiva) VALUES(" + str(
+                        idCliente) + ", " + str(codigoCuenta) + ", " + str(True) + ")"
+                    print(consulta2)
+                    cursor2.execute(consulta2)
+                    db.commit()
+                    cursor2.close()
+                    form = CuentaDeAhorro()
+                    mensaje = "Cuenta creada correctamente"
+                    variables = {
+                        'form': form,
+                        'mensaje': mensaje
+                    }
+        else:
+            mensaje = "Error de registro de cuenta"
+            variables = {
+                'form': form,
+                'mensaje': mensaje
+            }
+    return render(request, "addCuentaPlazoFijo.html", variables)

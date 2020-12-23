@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html' %}
+{% block content %}
+    <h1>Creacion de cuentas de ahorro</h1>
+    <hr>
+    <form method="post" class="formulario">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" class="btnSubmit"> Registrar cliente</button>
+    </form>
+    <h1 class="error">{{ mensaje }}</h1>
+{% endblock %}

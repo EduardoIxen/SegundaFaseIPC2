@@ -19,7 +19,7 @@ from . import views
 
 urlpatterns = [
     path('', views.login),
-    path('login/', views.login),
+    path('login/', views.login, name="login"),
     #path('registrocliente/', views.registroCliente),
     path('transferencia/', views.transferencia),
     path('pagotarjeta/', views.pagoTarjeta),
@@ -28,4 +28,6 @@ urlpatterns = [
     path('estadodecuenta/', views.estadoDeCeunta),
     path('pagoservicio/', views.pagoServicio),
     path('desde1/', views.base1),
+    path('infousr/', views.infoUsr, name="infousr"),
+    path('logout/', views.logout, name="logout"),
 ]

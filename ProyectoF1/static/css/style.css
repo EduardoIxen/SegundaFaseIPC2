@@ -160,6 +160,10 @@ tr{
   z-index: 1;
     margin: 0%;
 }
+#logout{
+    text-align: right;
+    float: right;
+}
 .dropdown-content a {
   float: none;
   color: black;

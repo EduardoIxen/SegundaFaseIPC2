@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth.decorators import login_required
 from . import views
 
 urlpatterns = [
-    path('registrocliente/', views.registroCliente, name = 'registrocliente'),
-    path('registroempresa/', views.registroEmpresa, name = "registroempresa"),
-    path('loginadmin/', views.loginAdmin, name = "loginadmin"),
+    path('registrocliente/', views.registroCliente, name='registrocliente'),
+    path('registroempresa/', views.registroEmpresa, name="registroempresa"),
+    path('loginadmin/', views.loginAdmin, name="loginadmin"),
+    path('logout/', views.logout, name="logout"),
 ]

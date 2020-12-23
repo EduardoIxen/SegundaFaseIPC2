@@ -100,18 +100,23 @@ def loginAdmin(request):
         password = request.POST['passwordlog']
         print(usuario)
         print(password)
-    #     db = MySQLdb.connect(host=host, user=user, password=contra, db=db_name, connect_timeout=5)
-    #     cursor = db.cursor()
         #consulta = "SELECT * FROM Administrador WHERE usuario = '"+usuario+"' and contrasenia = '"+password+"'"
         admin = Administrador.objects.filter(usuario=usuario).filter(contrasenia=password).values_list()
-        print(admin)
         if not admin:
             mensaje = "Usuario o contraseña incorrectos"
         else:
-            mensaje = "Usuario logueado"
-            return redirect('registrocliente', permanent=True)
-        variables = {
-            'mensaje': mensaje
-        }
+            usrL = admin[0][1]
+            dicSession = {
+                'usuario':usrL
+            }
+            request.session['datos'] = dicSession
+            return redirect('registrocliente')
+    variables = {
+        'mensaje': mensaje
+    }
 
     return render(request, "adminlogin.html", variables)
+
+def logout(request):
+    request.session['dato'] = {}
+    return redirect('loginadmin')

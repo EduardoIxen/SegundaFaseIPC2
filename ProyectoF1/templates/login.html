@@ -12,14 +12,16 @@
         <form class="formulario" method="post">
             {% csrf_token %}
             <label for="Iusuario">Usuario</label><br>
-            <input type="text" id="Iusuario" name="usuarioLog"><br>
+            <input type="text" id="Iusuario" name="usuariolog"><br>
 
             <label for="Ipass">Contraseña</label><br>
-            <input type="password" id="Ipass" name="passwordLog"><br>
+            <input type="password" id="Ipass" name="passwordlog"><br>
 
             <input type="submit" value="Ingresar" class="btn">
         </form>
     </div>
-
+    {% if mensaje == "Usuario o contraseña incorrectos" %}
+        <h1 style="color: red">{{ mensaje }}</h1>
+    {% endif %}
 </body>
 </html>

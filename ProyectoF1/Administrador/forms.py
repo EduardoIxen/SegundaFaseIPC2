@@ -20,6 +20,7 @@ class CuentaMonetaria(forms.Form):
     lstipoCliente = [(1,"Cliente individual"), (2, "Empresa")]
     tipocliente = forms.CharField(widget=forms.Select(choices=lstipoCliente))
     idcliente = forms.IntegerField(required=True, label="Cui del cliente o ID de la Empresa")
+
     class Meta:
         model = Cuentamonetaria
         fields = ('codigocuenta', 'montopormanejo', 'saldo', 'tipocliente', 'idcliente')
@@ -32,6 +33,7 @@ class CuentaDeAhorro(forms.Form):
     lstipoCliente = [(1,"Cliente individual"), (2, "Empresa")]
     tipocliente = forms.CharField(widget=forms.Select(choices=lstipoCliente))
     idcliente = forms.IntegerField(required=True, label="Cui del cliente o ID de la Empresa")
+
     class Meta:
         model = Cuentadeahorro
         fields = ('codigocuenta', 'tasainteres', 'saldo', 'tipocliente', 'idcliente')
@@ -45,6 +47,7 @@ class CuentaPlazoFijo(forms.Form):
     lstipoCliente = [(1,"Cliente individual"), (2, "Empresa")]
     tipocliente = forms.CharField(widget=forms.Select(choices=lstipoCliente))
     idcliente = forms.IntegerField(required=True, label="Cui del cliente o ID de la Empresa")
+
     class Meta:
         model = Cuentaplazofijo
         fields = ('codigocuenta', 'tasainteres', 'periodotiempo', 'saldo', 'tipocliente', 'idcliente')

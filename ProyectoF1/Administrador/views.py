@@ -140,7 +140,7 @@ def addCuentaMonetaria(request):
             saldo = datos.get('saldo')
             tipoCliente = datos.get('tipocliente')
             idCliente = datos.get('idcliente')
-            print(f"{type(tipoCliente)}, id {type(idCliente)}")
+
             db = MySQLdb.connect(host=host, user=user, password=contra, db=db_name, connect_timeout=5)
 
             cursor = db.cursor()
